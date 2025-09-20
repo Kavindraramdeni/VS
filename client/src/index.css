@@ -1,0 +1,181 @@
+/* ✅ Google Fonts must come first */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Rubik:wght@300;400;500;600;700&display=swap');
+
+/* ✅ Tailwind directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ✅ Custom CSS variables, themes, animations */
+:root {
+  --background: hsl(220, 8%, 4%);
+  --foreground: hsl(200, 15%, 92%);
+  --card: hsl(220, 10%, 6%);
+  --card-foreground: hsl(200, 15%, 92%);
+  --popover: hsl(220, 10%, 6%);
+  --popover-foreground: hsl(200, 15%, 92%);
+  --primary: hsl(51, 100%, 50%);
+  --primary-foreground: hsl(220, 15%, 8%);
+  --secondary: hsl(210, 40%, 8%);
+  --secondary-foreground: hsl(200, 15%, 92%);
+  --muted: hsl(200, 8%, 60%);
+  --muted-foreground: hsl(200, 8%, 60%);
+  --accent: hsl(51, 100%, 50%);
+  --accent-foreground: hsl(220, 15%, 8%);
+  --destructive: hsl(356, 90%, 54%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --border: hsl(200, 10%, 15%);
+  --input: hsl(200, 10%, 15%);
+  --ring: hsl(51, 100%, 50%);
+  --chart-1: hsl(51, 100%, 50%);
+  --chart-2: hsl(159, 100%, 36%);
+  --chart-3: hsl(42, 92%, 56%);
+  --chart-4: hsl(147, 78%, 41%);
+  --chart-5: hsl(341, 75%, 50%);
+  --sidebar: hsl(220, 10%, 6%);
+  --sidebar-foreground: hsl(200, 15%, 92%);
+  --sidebar-primary: hsl(51, 100%, 50%);
+  --sidebar-primary-foreground: hsl(220, 15%, 8%);
+  --sidebar-accent: hsl(210, 40%, 8%);
+  --sidebar-accent-foreground: hsl(200, 15%, 92%);
+  --sidebar-border: hsl(200, 10%, 15%);
+  --sidebar-ring: hsl(51, 100%, 50%);
+  --font-sans: "Rubik", system-ui, sans-serif;
+  --font-display: "Montserrat", system-ui, sans-serif;
+  --font-serif: Georgia, serif;
+  --font-mono: Menlo, monospace;
+  --radius: 12px;
+  --metal-gradient: linear-gradient(135deg, hsl(210, 12%, 20%) 0%, hsl(210, 10%, 35%) 100%);
+  --glass-gradient: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+}
+
+.dark {
+  /* Same dark theme variables (can override if needed) */
+  --background: hsl(220, 8%, 4%);
+  --foreground: hsl(200, 15%, 92%);
+  --card: hsl(220, 10%, 6%);
+  --card-foreground: hsl(200, 15%, 92%);
+  --popover: hsl(220, 10%, 6%);
+  --popover-foreground: hsl(200, 15%, 92%);
+  --primary: hsl(51, 100%, 50%);
+  --primary-foreground: hsl(220, 15%, 8%);
+  --secondary: hsl(210, 40%, 8%);
+  --secondary-foreground: hsl(200, 15%, 92%);
+  --muted: hsl(200, 8%, 60%);
+  --muted-foreground: hsl(200, 8%, 60%);
+  --accent: hsl(51, 100%, 50%);
+  --accent-foreground: hsl(220, 15%, 8%);
+  --destructive: hsl(356, 90%, 54%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --border: hsl(200, 10%, 15%);
+  --input: hsl(200, 10%, 15%);
+  --ring: hsl(51, 100%, 50%);
+  --sidebar: hsl(220, 10%, 6%);
+  --sidebar-foreground: hsl(200, 15%, 92%);
+  --sidebar-primary: hsl(51, 100%, 50%);
+  --sidebar-primary-foreground: hsl(220, 15%, 8%);
+  --sidebar-accent: hsl(210, 40%, 8%);
+  --sidebar-accent-foreground: hsl(200, 15%, 92%);
+  --sidebar-border: hsl(200, 10%, 15%);
+  --sidebar-ring: hsl(51, 100%, 50%);
+}
+
+/* ✅ Base layer */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    background: 
+      radial-gradient(1200px 700px at 10% 10%, rgba(255,212,64,0.03), transparent 60%),
+      radial-gradient(900px 500px at 90% 90%, rgba(255,212,64,0.02), transparent 60%),
+      var(--background);
+    line-height: 1.6;
+    margin: 0;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* ✅ Components layer */
+@layer components {
+  .glassmorphic {
+    backdrop-filter: blur(20px);
+    background: var(--glass-gradient);
+    border: 1px solid rgba(255,255,255,0.05);
+    box-shadow: 
+      0 8px 32px rgba(0,0,0,0.3),
+      inset 0 1px 0 rgba(255,255,255,0.02);
+  }
+
+  .metal-surface {
+    background: var(--metal-gradient);
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 
+      0 8px 25px rgba(0,0,0,0.4),
+      inset 0 1px 0 rgba(255,255,255,0.05);
+  }
+
+  .glow-accent {
+    box-shadow: 0 0 20px rgba(255,212,64,0.3);
+  }
+
+  .parallax-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: -1;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    opacity: 0.15;
+    transition: opacity 0.8s ease;
+  }
+}
+
+/* ✅ Utilities layer */
+@layer utilities {
+  .animate-float { animation: float 6s ease-in-out infinite; }
+  .animate-neonPulse { animation: neonPulse 1.5s infinite alternate; }
+  .animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite alternate; }
+  .animate-slide-up { animation: slide-up 0.8s ease-out; }
+  .animate-fade-in { animation: fade-in 0.6s ease-out; }
+  .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.25,0.46,0.45,0.94); }
+  .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
+  .animate-bounce-in { animation: bounce-in 1s ease-out; }
+  .animate-scale-up { animation: scale-up 0.6s ease-out; }
+  .animate-slide-in-left { animation: slide-in-left 0.8s ease-out; }
+  .animate-slide-in-right { animation: slide-in-right 0.8s ease-out; }
+  .animate-rotate-in { animation: rotate-in 0.8s ease-out; }
+  .animate-elastic { animation: elastic 1.2s ease-out; }
+}
+
+/* ✅ Keyframes */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0% { box-shadow: 0 0 20px rgba(255,212,64,0.2); }
+  100% { box-shadow: 0 0 30px rgba(255,212,64,0.4); }
+}
+
+@keyframes slide-up { from { transform: translateY(50px); opacity:0; } to { transform: translateY(0); opacity:1; } }
+@keyframes fade-in { from { opacity:0; } to { opacity:1; } }
+@keyframes bounce-in { 0%{transform:scale(0.3);opacity:0;}50%{transform:scale(1.05);}70%{transform:scale(0.9);}100%{transform:scale(1);opacity:1;} }
+@keyframes scale-up { from{transform:scale(0.8);opacity:0;} to
+{
+    transform: scale(1);
+    opacity: 1;
+  }
+}

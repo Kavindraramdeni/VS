@@ -1,0 +1,13 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../dist/server",    // output JS for server
+    "rootDir": "./",               // root of server files
+    "moduleResolution": "Node",    // Node-style module resolution
+    "noEmit": false,               // actually emit JS
+    "jsx": "none",                 // server doesn't use JSX
+    "target": "ES2022",            // compatible with Node 20+
+    "sourceMap": true              // optional: useful for debugging
+  },
+  "include": ["./**/*.ts"]
+}
