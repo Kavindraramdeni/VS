@@ -1,0 +1,2 @@
+source: dist/public
+destination: _site
