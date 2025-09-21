@@ -56,26 +56,25 @@ app.use((req, res, next) => {
     serveStatic(app, "../dist/public");
   }
 
-  // Start server
-  const DEFAULT_PORT = process.env.PORT || 7000;
-  const HOST = process.env.HOST || "127.0.0.1";
+   // Start server
+const PORT = process.env.PORT || 7000;
+const HOST = "0.0.0.0"; // required on Render
 
-  const server = app.listen(DEFAULT_PORT, HOST, () => {
-    const port = (server.address() as any).port;
-    console.log(`✅ Server running on http://${HOST}:${port} (${app.get("env")})`);
-  });
+const server = app.listen(PORT, HOST, () => {
+  console.log(`✅ Server running on http://${HOST}:${PORT} (${app.get("env")})`);
+});
 
-  // Handle port in use
-  server.on("error", (err: any) => {
-    if (err.code === "EADDRINUSE") {
-      console.warn(`⚠️ Port ${DEFAULT_PORT} is in use. Trying another port...`);
-      const fallbackServer = app.listen(0, HOST, () => {
-        const newPort = (fallbackServer.address() as any).port;
-        console.log(`✅ Server switched to http://${HOST}:${newPort}`);
-      });
-    } else {
-      console.error("❌ Server failed to start:", err);
-      process.exit(1);
-    }
-  });
+// Handle port in use
+server.on("error", (err: any) => {
+  if (err.code === "EADDRINUSE") {
+    console.warn(`⚠️ Port ${PORT} is in use. Trying another port...`);
+    const fallbackServer = app.listen(0, HOST, () => {
+      const newPort = (fallbackServer.address() as any).port;
+      console.log(`✅ Server switched to http://${HOST}:${newPort}`);
+    });
+  } else {
+    console.error("❌ Server failed to start:", err);
+    process.exit(1);
+  }
+});
 })();
