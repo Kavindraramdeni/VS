@@ -1,30 +1,23 @@
-import { storage } from "../server/storage";
-import { insertQuoteSchema } from "@shared/schema";
+import { VercelRequest, VercelResponse } from '@vercel/node';
+import { getQuotes, saveQuote } from './storage';
 
-export default async function handler(req, res) {
+export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
-    if (req.method === "POST") {
-      const data = insertQuoteSchema.parse(req.body);
-      const quote = await storage.createQuote(data);
-
-      return res.status(201).json({
-        success: true,
-        message: "Quote request submitted successfully",
-        data: {
-          id: quote.id,
-          name: quote.name,
-          service: quote.service
-        }
-      });
-    }
-
     if (req.method === "GET") {
-      const quotes = await storage.getQuotes();
-      return res.json({ success: true, data: quotes });
+      const quotes = await getQuotes();
+      return res.status(200).json(quotes);
     }
 
-    return res.status(405).json({ message: "Method Not Allowed" });
-  } catch (err) {
-    return res.status(400).json({ message: err.message });
+    if (req.method === "POST") {
+      const body = typeof req.body === "string" ? JSON.parse(req.body) : req.body;
+      await saveQuote(body);
+      return res.status(201).json({ message: "Saved" });
+    }
+
+    return res.status(405).json({ error: "Method Not Allowed" });
+
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : "Unknown error";
+    return res.status(500).json({ error: message });
   }
 }
